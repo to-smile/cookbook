@@ -1,1 +1,129 @@
+#
+
+
+#1.7
+#让字典保持有序
+from collections import OrderedDict
+
+
+p = {}
+p['val'] = 1
+p['prt'] = 4
+p['rst'] = 2
+p['ord'] = 5
+p['str'] = 8
+p['aft'] = 1
+
+print p
+
+d = OrderedDict()
+d['val'] = 1
+d['prt'] = 4
+d['rst'] = 2
+d['ord'] = 5
+d['str'] = 8
+d['aft'] = 1
+
+print d
+
+
+
+#1.6
+#在字典中将键映射到多个值上
+#list_l = {"a":[1,2,3],"c":[4,5,6]}
+#dict_d = {"b":{11,22,33},"e":{44,555,66}}
+
+from collections import defaultdict
+l = defaultdict(list)
+l['a'].append(1)
+l['a'].append(2)
+l['b'].append(2)
+l['a'].append(1)
+print l
+
+
+d = defaultdict(set)
+d['c'].add(3)
+d['c'].add(6)
+d['d'].add(4)
+d['c'].add(3)
+print d
+
+e = {}
+e.setdefault('a',[]).append(1)
+e.setdefault('b',[]).append(5)
+e.setdefault('a',[]).append(2)
+e.setdefault('a',[]).append(1)
+print e
+
+
+
+#1.5 
+#实现优先级队列
+import heapq
+
+class PriorityQueue:
+   def __init__(self):
+      self._list = []
+      self._index = 0  #下标
+
+   def push(self,item,priority):
+      heapq.heappush(self._list,(-priority,self._index,item))
+      self._index += 1
+
+   def pop(self):
+      self._index -= 1 #有没有无所谓啊
+      return heapq.heappop(self._list)
+
+   def __repr__(self):
+      val = 'list: '+str(self._list)+',index: '+str(self._index)
+      return val
+
+q=PriorityQueue()
+q.push("val",1)
+q.push("tie",4)
+q.push("fly",3)
+q.push("gif",1)
+print q
+print 'pop:',q.pop()
+print q
+print 'pop:',q.pop()
+print q
+print 'pop:',q.pop()
+print q
+
+
+#1.4
+#得到最大和最小的N个数
+import heapq
+nums = [22,-3,5,-23,56,5,18,-21,45]
+print "4 largth: ",heapq.nlargest(4,nums)
+print "3 small: ",heapq.nsmallest(3,nums)
+
+val_dict = [{"name":"alir","age":28},{"name":"bob","age":18},{"name":"cliry","age":22}]
+print "3 largth: ",heapq.nlargest(3,val_dict,key=lambda p:p['age'])
+print "3 small: ",heapq.nsmallest(3,val_dict,key=lambda p:p['age'])
+
+
+heap = list(nums)
+heapq.heapify(heap)
+print heap
+print "the min: ",heapq.heappop(heap)
+print "the max: ",max(heap)
+
+
+#1.1 - 1.3
+p = (3,4)
+x,y = p
+print p,x,y
+
+#丢弃部分值
+p = "seek"
+x,_,_,y = p
+print p,x,y
+
+#当前Python版本为2.6.6  不支持*表达式
+#p = (2,3,(4,5,6),7,8,9)
+##x,y,(A,*B),*val = p
+##print p,x,y.A,B,val
 
