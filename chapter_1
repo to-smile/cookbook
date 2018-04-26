@@ -1,5 +1,70 @@
 #
 
+#1.10
+#从序列中移除重复项且保持元素间顺序不变
+
+#序列值可哈希
+def dedupe(items):
+   seen = set()
+   for item in items:
+      if item not in seen:
+          yield item
+          seen.add(item)
+   print seen
+
+a = [1,5,2,3,6,1,7,2,9,5]
+print list(dedupe(a))
+
+#序列值不可哈希
+def dedupe2(items, key=None):
+   seen = set()
+   #print items
+   for item in items:
+      #print item,"key : ",key
+      #print key(item)
+      #print item.keys()
+      val = item if key is None else key(item)
+      #print val
+      if val not in seen:
+          yield item
+          seen.add(val)
+   print seen
+
+a = [{'x':1,'y':2},{'x':1,'y':3},{'x':1,'y':2},{'x':3,'y':1}]
+print list(dedupe2(a, key = lambda d:(d['x'],d['y']) ))
+print list(dedupe2(a, key = lambda d:d['x']))
+
+#单纯的去重
+a = [1,5,2,3,6,1,7,2,9,5]
+print set(a) #这个结果会排序
+
+
+
+#1.9
+#在两个字典中寻找相同点
+a = {'x':1,'y':2,'z':5}
+b = {'z':3,'u':2,'x':1}
+
+print a.keys()
+#print a.keys() & b.keys()
+#print a.keys() - b.keys()
+#print a.items() & b.items()
+
+#c = {key:a[key] for key in a.keys() - b.keys()}
+
+
+#1.8
+#与字典有关的计算
+    #字典任意排序
+val = {"A":12,"C":4,"R":25}
+print min(zip(val.values(),val.keys()))
+
+val_sorted = sorted(zip(val.values(),val.keys()))
+print val_sorted
+
+val_sorted = sorted(zip(val.values(),val.keys()),reverse = True)
+print val_sorted
+
 
 #1.7
 #让字典保持有序
